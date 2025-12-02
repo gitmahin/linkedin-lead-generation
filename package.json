@@ -10,8 +10,13 @@
   },
   "devDependencies": {
     "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.12",
+    "tsup": "^8.5.1",
     "turbo": "^2.6.1",
     "typescript": "5.9.2"
+  },
+  "dependencies": {
+    "tailwind-merge": "^3.0.1"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {
