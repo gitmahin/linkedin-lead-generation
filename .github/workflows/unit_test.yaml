@@ -32,7 +32,7 @@ jobs:
           cache: "pnpm"
 
       - name: Configuring ts-node
-        run: pnpm add -D ts-node
+        run: pnpm add -D ts-node -w
 
       - name: Install dependencies
         run: pnpm install
