@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "build": "tsup --format esm,cjs --dts --external react --minify",
+    "test": "jest",
     "lint": "eslint . --max-warnings 0",
     "generate:component": "turbo gen react-component",
     "check-types": "tsc --noEmit"
