@@ -31,6 +31,9 @@ jobs:
           node-version: 20
           cache: "pnpm"
 
+      - name: Configuring ts-node
+        run: pnpm add -D ts-node
+
       - name: Install dependencies
         run: pnpm install
 
