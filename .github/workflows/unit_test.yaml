@@ -5,7 +5,7 @@ on:
     branches-ignore:
       - "*"
   pull_request_target:
-    types: mahin
+    types:
       - opened
       - synchronize
       - reopened
