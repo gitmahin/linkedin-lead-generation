@@ -38,5 +38,5 @@ jobs:
         run: pnpm install
 
       - name: Start UI Unit Testing
-        run: pnpm test --filter ui
+        run: pnpm test --filter ui 
 # rest of unit testings
