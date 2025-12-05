@@ -27,4 +27,7 @@ export * from "./textarea"
 export * from "./toggle-group"
 export * from "./toggle"
 export * from "./tooltip"
+export * from "./empty"
+export * from "./sidebar"
+export * from "./avatar"
 
