@@ -1,3 +1,4 @@
+"use client"
 export * from "./lib";
 export * from "./button";
 export * from "./accordion"
@@ -30,4 +31,5 @@ export * from "./tooltip"
 export * from "./empty"
 export * from "./sidebar"
 export * from "./avatar"
+export * from "./hover-card"
 
