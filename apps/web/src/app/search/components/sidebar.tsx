@@ -3,8 +3,30 @@ import { sidebarStore } from "@/services/store/searchPageStore";
 import { Button, Input, Label } from "@repo/ui";
 import React from "react";
 import { observer } from "mobx-react";
+import { getLinkedinLead } from "@/actions/server.action";
 
 const LeadFields = () => {
+  const handleGetData = async () => {
+    // google search
+    const g_data = await fetch(
+      "https://www.googleapis.com/customsearch/v1?key=AIzaSyBwta2CawrUbd88Yqfresk1-kxnhwrJesU&cx=c425ced687cdd4142&q=Softawre"
+    );
+
+    // uipile search
+    const url = "https://api20.unipile.com:15029/api/v1/linkedin/search?account_id=yPF77nLQTamn56S5xObxNw";
+    const options = {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        'X-API-KEY': 'zUR7+TTU.R/aLoy+OiXVdZM+4nk/EQs2sJySI8FW+SQ/+TeDWEtc=',
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ api: "classic", category: "people" }),
+    };
+    const unipile_data = await fetch(url, options);
+
+    console.log("Here is the data", await unipile_data.json());
+  };
   return (
     <div className="space-y-4">
       <div>
@@ -21,7 +43,10 @@ const LeadFields = () => {
         <Input type="text" name="industry" className="mt-2" />
       </div>
 
-      <Button className="w-[calc(100%-25px)] absolute bottom-3 cursor-pointer">
+      <Button
+        onClick={handleGetData}
+        className="w-[calc(100%-25px)] absolute bottom-3 cursor-pointer"
+      >
         Extract Leads
       </Button>
     </div>
@@ -48,9 +73,7 @@ export const SearchPageSidebar = observer(() => {
       {sidebarStore.location ? (
         <aside className="w-full h-full p-2 ">
           <div className="w-full h-full rounded-2xl bg-background-925C relative p-3">
-        
-              <SearchPageSidebarContentWrapper />
-         
+            <SearchPageSidebarContentWrapper />
           </div>
         </aside>
       ) : (

@@ -1,18 +1,18 @@
-import { action, makeObservable, observable } from "mobx"
+import { action, makeObservable, observable } from "mobx";
 
 class SidebarStore {
-    location: string = ""
+  location: string = "";
 
-    constructor() {
-        makeObservable(this, {
-            location: observable,
-            setLocation: action
-        })
-    }
+  constructor() {
+    makeObservable(this, {
+      location: observable,
+      setLocation: action,
+    });
+  }
 
-    setLocation(location: string) {
-        this.location = location
-    }
+  setLocation(location: string) {
+    this.location = location;
+  }
 }
 
-export const sidebarStore = new SidebarStore()
+export const sidebarStore = new SidebarStore();

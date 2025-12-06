@@ -38,19 +38,22 @@ export function EmptySearchMainPage() {
           <CardContent>
             <div className="flex justify-between gap-4">
               <Avatar>
-                <AvatarImage src="/images/lead_img.png" className="filter invert" />
+                <AvatarImage
+                  src="/images/lead_img.png"
+                  className="filter invert"
+                />
                 <AvatarFallback>VC</AvatarFallback>
               </Avatar>
               <div className="space-y-1 text-start">
                 <h4 className="text-sm font-semibold">Lead</h4>
                 <p className="text-sm text-foreground-2">
-                  Find high-quality leads based on job title and professional role, helping you reach the right decision-makers effortlessly.
+                  Find high-quality leads based on job title and professional
+                  role, helping you reach the right decision-makers
+                  effortlessly.
                 </p>
-              
               </div>
             </div>
           </CardContent>
-
         </Card>
       </EmptyContent>
     </Empty>

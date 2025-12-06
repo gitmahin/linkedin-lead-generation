@@ -29,7 +29,7 @@ export const SearchPageHeader = () => {
       <div className="flex justify-start items-center gap-2 px-3">
         {SIDEBAR_HEADER_LINKS.map((item, i) => {
           return (
-            <Link href={`/search/${item.slug}`} key={`${item.slug}-${i}`} >
+            <Link href={`/search/${item.slug}`} key={`${item.slug}-${i}`}>
               <Button
                 size={"sm"}
                 className="cursor-pointer"

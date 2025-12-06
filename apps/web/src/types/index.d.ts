@@ -1,1 +1,3 @@
-export * from "./layout"
+export * from "./layout";
+export * from "./link";
+export * from "./linkedin-data";

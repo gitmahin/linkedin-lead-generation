@@ -1,1 +1,1 @@
-export * from "./sidebarStore"
+export * from "./sidebarStore";

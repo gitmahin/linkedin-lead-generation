@@ -33,6 +33,12 @@ export default function RootLayout({
         <ThemeProvider attribute={"class"} defaultTheme="dark">
           <MainWrapper>{children}</MainWrapper>
         </ThemeProvider>
+
+        <script
+          async
+          src="https://cse.google.com/cse.js?cx=c425ced687cdd4142"
+        ></script>
+        <div className="gcse-search"></div>
       </body>
     </html>
   );
