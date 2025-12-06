@@ -23,7 +23,7 @@ import {
 
 export function EmptySearchMainPage() {
   return (
-    <Empty className="from-zinc-900 to-zinc-950 h-full bg-gradient-to-b from-30% rounded-none">
+    <Empty className="from-zinc-900 to-zinc-950 h-full bg-gradient-to-b from-30% rounded-none rounded-tl-2xl">
       <EmptyHeader>
         <EmptyMedia variant="icon">
           <Search />
