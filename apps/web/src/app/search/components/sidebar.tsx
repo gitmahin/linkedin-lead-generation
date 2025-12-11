@@ -20,7 +20,7 @@ const LeadFields = () => {
       method: "POST",
       headers: {
         accept: "application/json",
-        'X-API-KEY': 'zUR7+TTU.R/aLoy+OiXVdZM+4nk/EQs2sJySI8FW+SQ/+TeDWEtc=',
+        'X-API-KEY': '',
         'content-type': 'application/json',
       },
       body: JSON.stringify({ api: "classic", category: "people" }),
