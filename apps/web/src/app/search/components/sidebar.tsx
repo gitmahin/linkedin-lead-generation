@@ -4,16 +4,18 @@ import { Button, Input, Label } from "@repo/ui";
 import React from "react";
 import { observer } from "mobx-react";
 import { getLinkedinLead } from "@/actions/server.action";
+import { apifyClient } from "@/lib";
 
 const LeadFields = () => {
   const handleGetData = async () => {
     // google search
-    const g_data = await fetch(
-      "https://www.googleapis.com/customsearch/v1?key=AIzaSyBwta2CawrUbd88Yqfresk1-kxnhwrJesU&cx=c425ced687cdd4142&q=Softawre"
-    );
+    // const g_data = await fetch(
+    //   "https://www.googleapis.com/customsearch/v1?key=AIzaSyBwta2CawrUbd88Yqfresk1-kxnhwrJesU&cx=c425ced687cdd4142&q=Softawre"
+    // );
 
     // uipile search
     const url = "https://api20.unipile.com:15029/api/v1/linkedin/search?account_id=yPF77nLQTamn56S5xObxNw";
+
     const options = {
       method: "POST",
       headers: {
@@ -25,7 +27,21 @@ const LeadFields = () => {
     };
     const unipile_data = await fetch(url, options);
 
-    console.log("Here is the data", await unipile_data.json());
+    // apify
+    // const input = {
+    //   KEYWORD: "developer",
+    //   DOMAIN_EMAIL: ["@gmail.com"],
+    //   LOCATION: "",
+    //   MAX_ITEMS: 20,
+    // };
+
+    // const run = await apifyClient.actor("TzkiiGkKUFoXta1dq").call(input);
+    // const { items } = await apifyClient
+    //   .dataset(run.defaultDatasetId)
+    //   .listItems();
+    // console.dir(items);
+
+    console.log(await unipile_data.json())
   };
   return (
     <div className="space-y-4">
