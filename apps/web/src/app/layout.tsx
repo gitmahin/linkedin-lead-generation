@@ -4,6 +4,7 @@ import "@repo/ui/styles/globals.css";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { MainWrapper } from "@/components/mainwrapper";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,8 @@ export default function RootLayout({
         <ThemeProvider attribute={"class"} defaultTheme="dark">
           <MainWrapper>{children}</MainWrapper>
         </ThemeProvider>
+
+        <Toaster position="bottom-center" richColors={true} theme="dark" />
 
         <script
           async

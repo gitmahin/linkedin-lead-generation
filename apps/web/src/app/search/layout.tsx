@@ -19,7 +19,7 @@ export default function Layout({ children }: LayoutPropsType) {
         </div>
 
         <div className="w-full  pr-2 flex justify-center items-start gap-2">
-          <div className="w-full py-2">{children}</div>
+          <div className="w-full overflow-hidden">{children}</div>
           <ChatbotSidebar />
         </div>
       </div>

@@ -11,10 +11,6 @@ const SIDEBAR_HEADER_LINKS: LinkType[] = [
     label: "Leads",
     slug: "leads",
   },
-  {
-    label: "People",
-    slug: "people",
-  },
 ];
 export const SearchPageHeader = () => {
   const path_name = usePathname();

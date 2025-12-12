@@ -51,7 +51,7 @@ const data = {
   menus: [
     {
       name: "Search",
-      url: "/search",
+      url: "/search/leads",
       icon: Search,
     },
     {
