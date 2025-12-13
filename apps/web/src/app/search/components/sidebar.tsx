@@ -18,9 +18,6 @@ import {
 } from "@repo/ui";
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react";
-import { getLinkedinLead } from "@/actions/server.action";
-import { apifyClient } from "@/lib";
-import { io, Socket } from "socket.io-client";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import {
@@ -50,9 +47,72 @@ const SCRAPPING_APPS = [
     label: "reddit",
   },
 ];
-const LeadFields = observer(() => {
-  const [open, setOpen] = React.useState(false);
+
+const ScrappingAppSelector = () => {
+    const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(SCRAPPING_APPS[0]?.value);
+  return <div>
+          <Label className="mb-2">Using</Label>
+          <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                disabled
+                variant="outline"
+                role="combobox"
+                aria-expanded={open}
+                className=" justify-between w-full"
+              >
+                {value
+                  ? SCRAPPING_APPS.find(
+                      (framework) => framework.value === value
+                    )?.label
+                  : SCRAPPING_APPS[0]?.label}
+                <ChevronsUpDown className="opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[200px] p-0">
+              <Command>
+                <CommandInput
+                  placeholder="Search framework..."
+                  className="h-9"
+                />
+                <CommandList>
+                  <CommandEmpty>No framework found.</CommandEmpty>
+                  <CommandGroup>
+                    {SCRAPPING_APPS.map((framework) => (
+                      <CommandItem
+                        key={framework.value}
+                        value={
+                          framework.value
+                            ? framework.value
+                            : SCRAPPING_APPS[0]?.value
+                        }
+                        onSelect={(currentValue) => {
+                          setValue(currentValue === value ? "" : currentValue);
+                          setOpen(false);
+                        }}
+                      >
+                        {framework.label}
+                        <Check
+                          className={cn(
+                            "ml-auto",
+                            value === framework.value
+                              ? "opacity-100"
+                              : "opacity-0"
+                          )}
+                        />
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+        </div>
+}
+
+const LeadFields = observer(() => {
+
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   // const handleGetData = async () => {
@@ -207,64 +267,7 @@ const LeadFields = observer(() => {
   return (
     <form onSubmit={handleSubmit(handleGetDataSocket)}>
       <div className="space-y-4">
-        <div>
-          <Label className="mb-2">Using</Label>
-          <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-              <Button
-                disabled
-                variant="outline"
-                role="combobox"
-                aria-expanded={open}
-                className=" justify-between w-full"
-              >
-                {value
-                  ? SCRAPPING_APPS.find(
-                      (framework) => framework.value === value
-                    )?.label
-                  : SCRAPPING_APPS[0]?.label}
-                <ChevronsUpDown className="opacity-50" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0">
-              <Command>
-                <CommandInput
-                  placeholder="Search framework..."
-                  className="h-9"
-                />
-                <CommandList>
-                  <CommandEmpty>No framework found.</CommandEmpty>
-                  <CommandGroup>
-                    {SCRAPPING_APPS.map((framework) => (
-                      <CommandItem
-                        key={framework.value}
-                        value={
-                          framework.value
-                            ? framework.value
-                            : SCRAPPING_APPS[0]?.value
-                        }
-                        onSelect={(currentValue) => {
-                          setValue(currentValue === value ? "" : currentValue);
-                          setOpen(false);
-                        }}
-                      >
-                        {framework.label}
-                        <Check
-                          className={cn(
-                            "ml-auto",
-                            value === framework.value
-                              ? "opacity-100"
-                              : "opacity-0"
-                          )}
-                        />
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                </CommandList>
-              </Command>
-            </PopoverContent>
-          </Popover>
-        </div>
+        <ScrappingAppSelector/>
         {leadContainerStore.leads.length > 0 && (
           <div className="text-right my-10">
             <Label className="text-[16px] text-foreground-2">
@@ -319,13 +322,42 @@ const LeadFields = observer(() => {
   );
 });
 
+
+const AdvancedLeadFields = observer(() => {
+  return <div>
+    <form action="">
+          <div className="space-y-4">
+
+            <div>
+              <Label></Label>
+              <Input type="text" className="mt-2" />
+            </div>
+
+
+ <div>
+              <Label></Label>
+              <Input type="text" className="mt-2" />
+            </div>
+
+             <div>
+              <Label></Label>
+              <Input type="text" className="mt-2" />
+            </div>
+
+          </div>
+
+
+    </form>
+  </div>
+})
+
 const SearchPageSidebarContentWrapper = observer(() => {
   return (
     <>
-      {sidebarStore.location === "leads" ? (
+      {sidebarStore.location === "basic-leads" ? (
         <LeadFields />
-      ) : sidebarStore.location === "people" ? (
-        "people sidebar"
+      ) : sidebarStore.location === "advanced-leads" ? (
+        <AdvancedLeadFields/>
       ) : (
         "Undefined"
       )}

@@ -22,46 +22,47 @@ export async function scrappLinkedinLead(socket: Socket, data: FormValues) {
 
     await page.setViewport({ width: 1500, height: 1024 })
 
+    page.goto("https://www.linkedin.com/login")
+
+    // Load cookies if they exist
+    if (fs.existsSync(COOKIE_PATH)) {
+        const cookies = JSON.parse(fs.readFileSync(COOKIE_PATH, 'utf-8'));
+        await browser.setCookie(...cookies);
+        console.log('Cookies loaded, session restored.');
+    }
+
+    // Wait for manual login if cookies are not present
+    if (!fs.existsSync(COOKIE_PATH)) {
+
+        console.log('Please log in manually...');
+        await page.waitForSelector("input")
+        await page.type("#username", "sdgsd@gmail.com")
+        await page.type("#password", "hg$$%hkmhhi##@355")
+        await page.locator("button[type=submit]").click()
+
+        const profileImgSelector = 'img[src*="profile-displayphoto"]';
+        await page.waitForSelector(profileImgSelector, { timeout: 0 });
+
+        const cookies = await browser.cookies();
+        fs.writeFileSync(COOKIE_PATH, JSON.stringify(cookies, null, 2));
+        console.log('Cookies saved for future runs.');
+    }
+    console.log("Logged in success")
+
     for (let i = 1; i <= pageNumber; i++) {
 
-        const queryParams = new URLSearchParams({
-            keywords: data.job_title,
-            origin: "SWITCH_SEARCH_VERTICAL",
-            page: String(i)
-        })
-
-        // Load cookies if they exist
-        if (fs.existsSync(COOKIE_PATH)) {
-            const cookies = JSON.parse(fs.readFileSync(COOKIE_PATH, 'utf-8'));
-            await browser.setCookie(...cookies);
-            console.log('Cookies loaded, session restored.');
-        }
-
-
-        // Wait for manual login if cookies are not present
-        if (!fs.existsSync(COOKIE_PATH)) {
-
-            console.log('Please log in manually...');
-            await page.waitForSelector("input")
-            await page.type("#username", "nimahin25@gmail.com")
-            await page.type("#password", "hg$$%hkmhhi##@355")
-            await page.locator("button[type=submit]").click()
-
-            const profileImgSelector = 'img[src*="profile-displayphoto"]';
-            await page.waitForSelector(profileImgSelector, { timeout: 0 });
-
-            const cookies = await browser.cookies();
-            fs.writeFileSync(COOKIE_PATH, JSON.stringify(cookies, null, 2));
-            console.log('Cookies saved for future runs.');
-        }
-        console.log("Logged in success")
         try {
+            const queryParams = new URLSearchParams({
+                keywords: data.job_title,
+                origin: "SWITCH_SEARCH_VERTICAL",
+                page: String(i)
+            })
 
             const response = await page.goto(`https://www.linkedin.com/search/results/people/?${queryParams}`);
 
             if (!response) {
                 socket.emit("linkedin_search_page_not_found")
-                break;
+                return
             }
 
             socket.emit("extracting_page", {

@@ -5,7 +5,7 @@ import http from "http"
 import { Server } from "socket.io"
 import { FormValues, scrappLinkedinLead } from "./utils/scrap_web"
 import { GoogleGenAI } from "@google/genai";
-const ai = new GoogleGenAI({ apiKey: "AIzaSyBbn6_a1U17fzgrc5KNx5lxIKXmA1ylGaI" });
+const ai = new GoogleGenAI({ apiKey: "AIzaSyB-QfRnCd6yP5hkLrJTvXqfvw89HLydlzo" });
 
 const app = express()
 const server = http.createServer(app)

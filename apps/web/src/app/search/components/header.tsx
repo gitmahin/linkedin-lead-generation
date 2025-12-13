@@ -8,8 +8,12 @@ import { useEffect } from "react";
 
 const SIDEBAR_HEADER_LINKS: LinkType[] = [
   {
-    label: "Leads",
-    slug: "leads",
+    label: "Basic Leads",
+    slug: "basic-leads",
+  },
+  {
+    label: "Advanced Leads",
+    slug: "advanced-leads",
   },
 ];
 export const SearchPageHeader = () => {
